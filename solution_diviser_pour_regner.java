@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class solution_recursive { 
-
+public class solution_diviser_pour_regner{
 
     public static void main(String[] args) {
 
@@ -20,34 +19,39 @@ public class solution_recursive {
                 String h = lines.get(i);
                 String[] sequence = h.split(" ");
 
-               System.out.println(foundenvahissant(sequence.length,sequence,sequence));
+               System.out.println(foundenvahissant(sequence.length,sequence,sequence,0,sequence.length));
       
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
 
-    public static String foundenvahissant( int length_sequence_t,String[] sequence_t,String[] sequence){
-
-        String[] arr = sequence_t;
-        List<String> list = Arrays.asList(arr);
-        int occu = Collections.frequency(list, sequence[0]);
+    public static String foundenvahissant( int length_sequence_t,String[] sequence_t,String[] sequence,int low,int high){
+        
         
 
-        if (sequence.length == 1 && occu == 1 && length_sequence_t != 1) {
+        int mid = (low + high / 2) + 1;
+
+        String[] sequence_biggest_part = Arrays.copyOfRange(sequence, low, mid);
+        
+        // recherche du nombre d'occurence 
+        String[] arr = sequence_t;
+        List<String> list = Arrays.asList(arr);
+        int occu = Collections.frequency(list, sequence_biggest_part[0]);
+
+        if (sequence_biggest_part.length <= 2 && occu == 1 && length_sequence_t != 1) {
             return "null";
         }
         else if (occu > (length_sequence_t/ 2)){
             return sequence[0];
         }
         else {
-            return foundenvahissant(length_sequence_t,sequence_t,Arrays.copyOfRange(sequence, 1, sequence.length));
+            return foundenvahissant(length_sequence_t,sequence_t,sequence_biggest_part,low,mid);
         }
+
     }
 
 
-    
-    
+
 }
