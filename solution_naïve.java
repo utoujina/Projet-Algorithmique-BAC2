@@ -30,26 +30,26 @@ public class solution_naïve {
     public static String foundenvahissant( int length , String[] sequence){
 
         String envahissant = "null";
-        int occu = 0 ;
+        String[] arr = sequence;
+        List<String> list = Arrays.asList(arr);
+        int occu;
 
-        //find occu of the first plante
+    
        String plante1 = sequence[0];
 
         for(int i = 0; i < length; i++){
 
-            if (plante1 != sequence[i]) {
-                
-                // compter les occurrences de la plante1
-                String[] arr = sequence;
-                List<String> list = Arrays.asList(arr);
-                occu = Collections.frequency(list, plante1);
-             
-                if (occu > (length/ 2)){
+            occu = Collections.frequency(list, plante1);
 
-                    envahissant = plante1;
-                }
-                plante1 = sequence[i];
+            if   (occu > (length/ 2)){
+
+                envahissant = plante1;
             }
+
+            else if (plante1 != sequence[i]) {
+                
+                plante1 = sequence[i];
+                            }
         }
         return envahissant;
     }
